@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const appPath = require("./config/paths");
 const middleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const express = require("express");
@@ -25,7 +26,7 @@ app.use(
 app.use(express.static(config.output.path));
 
 app.get("*", function (req, res) {
-  res.sendFile(path.resolve(__dirname, "../dist/index.html"));
+  res.sendFile(path.resolve(appPath.outputPath, "index.html"));
 });
 
 app.listen(3000, () => console.log("Example app listening on port 3000!"));
