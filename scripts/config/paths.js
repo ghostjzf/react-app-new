@@ -2,8 +2,8 @@ const path = require("path");
 
 const rootPath = path.join(__dirname, "../../");
 
-function resolve(path) {
-  return path.resolve(rootPath, path);
+function resolve(pathname) {
+  return path.resolve(rootPath, pathname);
 }
 
 module.exports = {
