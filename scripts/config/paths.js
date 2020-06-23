@@ -9,5 +9,6 @@ function resolve(pathname) {
 module.exports = {
   outputPath: resolve("dist"),
   srcPath: resolve("src"),
+  entryPath: resolve("src/index.js"),
   publicPath: resolve("public"),
 };
