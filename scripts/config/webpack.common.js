@@ -10,6 +10,10 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         loader: "babel-loader",
+        options: {
+          cacheDirectory: true,
+          cacheCompression: false,
+        },
       },
       {
         test: /\.css/,
@@ -17,6 +21,9 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
     ],
+  },
+  resolve: {
+    extensions: [".tsx", ".js", ".json"],
   },
   plugins: [
     new webpackBar({
