@@ -13,10 +13,11 @@ const {
 const { printDevMessage } = require("./utils/printMessage");
 
 const compiler = webpack(config);
-const instance = middleware(compiler, devMiddlewareOptions);
+const devInstance = middleware(compiler, devMiddlewareOptions);
+const hotInstance = webpackHotMiddleware(compiler, hotMiddlewareOptions);
 
-app.use(instance);
-app.use(webpackHotMiddleware(compiler, hotMiddlewareOptions));
+app.use(devInstance);
+app.use(hotInstance);
 app.use(express.static(config.output.path));
 
 app.get("/*", function (req, res) {
