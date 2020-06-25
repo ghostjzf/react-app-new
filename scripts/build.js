@@ -9,6 +9,9 @@ compiler.run((err, stats) => {
   } else {
     console.log(
       stats.toString({
+        warnings: true,
+        errorDetails: true,
+        cachedAssets: true,
         builtAt: false,
         timings: false,
         colors: true,
