@@ -20,9 +20,7 @@ module.exports = {
   },
   plugins: [
     new webpackBar({
-      name: "react-init",
-      // react 蓝
-      color: "#61dafb",
+      name: "react-app",
     }),
     new htmlWebpackPlugin({
       template: path.resolve(appPath.publicPath, "index.html"),
