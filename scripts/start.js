@@ -11,7 +11,7 @@ const ip = require("./utils/getIPAddress");
 const compiler = webpack(config);
 const instance = middleware(compiler, {
   noInfo: true,
-  publicPath: config.output.path,
+  // publicPath: config.output.publicPath,
   // 只在发生错误或有新的编译时输出
   stats: "minimal",
 });
