@@ -5,7 +5,7 @@ import Content from "./Content";
 
 export default function App() {
   return (
-    <div>
+    <div className="app-wrap">
       <BrowserRouter>
         <Header />
         <Content />

@@ -31,7 +31,7 @@ app.listen(3000, (err) => {
     return;
   }
 
-  instance.waitUntilValid(() => {
+  devInstance.waitUntilValid(() => {
     printDevMessage();
   });
 });
