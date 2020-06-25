@@ -2,6 +2,7 @@ const webpackCommon = require("./webpack.common.js");
 const merge = require("webpack-merge");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const appPath = require("./paths");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(webpackCommon, {
   mode: "production",
@@ -12,6 +13,31 @@ module.exports = merge(webpackCommon, {
     path: appPath.outputPath,
     filename: "[name].[contenthash:8].js",
     publicPath: "/",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css/,
+        exclude: /node_modules/,
+        use: [{ loader: MiniCssExtractPlugin.loader }, "css-loader"],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass"),
+              sassOptions: {
+                fiber: require("fibers"),
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
   optimization: {
     // chunkIds: 'named', // 开发环境设为named利于debug, "webpack5"生产环境使用deterministic适合长期缓存，默认启用生产模式
@@ -38,5 +64,11 @@ module.exports = merge(webpackCommon, {
       },
     },
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash:8].css",
+      chunkFilename: "[name].[contenthash:8].chunk.css",
+    }),
+  ],
 });

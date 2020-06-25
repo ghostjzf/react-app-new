@@ -2,6 +2,7 @@ const path = require("path");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const appPath = require("./paths");
 const webpackBar = require("webpackbar");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   module: {
@@ -14,27 +15,6 @@ module.exports = {
           cacheDirectory: true,
           cacheCompression: false,
         },
-      },
-      {
-        test: /\.css/,
-        exclude: /node_modules/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              implementation: require("sass"),
-              sassOptions: {
-                fiber: require("fibers"),
-              },
-            },
-          },
-        ],
       },
     ],
   },

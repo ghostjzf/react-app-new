@@ -16,6 +16,31 @@ module.exports = merge(webpackCommon, {
     path: appPath.outputPath,
     publicPath: "/",
   },
+  module: {
+    rules: [
+      {
+        test: /\.css/,
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass"),
+              sassOptions: {
+                fiber: require("fibers"),
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // 启动HMR
   ],
