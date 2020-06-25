@@ -19,12 +19,25 @@ module.exports = merge(webpackCommon, {
       {
         test: /\.css/,
         exclude: /node_modules/,
-        use: [{ loader: MiniCssExtractPlugin.loader }, "css-loader"],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: true,
+            },
+          },
+          "css-loader",
+        ],
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: true,
+            },
+          },
           "css-loader",
           {
             loader: "sass-loader",
