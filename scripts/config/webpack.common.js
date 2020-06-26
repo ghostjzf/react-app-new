@@ -2,7 +2,6 @@ const path = require("path");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const appPath = require("./paths");
 const webpackBar = require("webpackbar");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   module: {
@@ -27,6 +26,8 @@ module.exports = {
     }),
     new htmlWebpackPlugin({
       template: path.resolve(appPath.publicPath, "index.html"),
+      filename: "index.html",
+      hash: true,
     }),
   ],
 };

@@ -27,6 +27,7 @@ module.exports = merge(webpackCommon, {
             },
           },
           "css-loader",
+          "postcss-loader",
         ],
       },
       {
@@ -39,6 +40,7 @@ module.exports = merge(webpackCommon, {
             },
           },
           "css-loader",
+          "postcss-loader",
           {
             loader: "sass-loader",
             options: {
