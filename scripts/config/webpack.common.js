@@ -7,6 +7,12 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: "pre",
+        test: /\.(tsx|ts|js)$/,
+        exclude: /node_modules/,
+        loader: "eslint-loader",
+      },
+      {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         loader: "babel-loader",

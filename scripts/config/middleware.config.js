@@ -6,7 +6,8 @@ const devMiddlewareOptions = {
 };
 
 const hotMiddlewareOptions = {
-  log: console.log,
+  timeout: 20000,
+  log: false,
   path: "/__webpack_hmr",
   heartbeat: 10 * 1000,
   // 编译出错会在网页中显示出错信息遮罩
