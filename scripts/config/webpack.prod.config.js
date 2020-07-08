@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const webpackCommon = require("./webpack.common.js");
 const merge = require("webpack-merge");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -86,5 +87,6 @@ module.exports = merge(webpackCommon, {
       filename: "[name].[contenthash:8].css",
       chunkFilename: "[name].[contenthash:8].chunk.css",
     }),
+    new webpack.BannerPlugin("make 2020 by ghostjzf"),
   ],
 });
