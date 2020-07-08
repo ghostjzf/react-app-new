@@ -14,6 +14,7 @@ module.exports = merge(webpackCommon, {
     filename: "[name].[contenthash:8].js",
     publicPath: "/",
   },
+  devtool: "hidden-source-map",
   module: {
     rules: [
       {

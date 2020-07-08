@@ -14,6 +14,7 @@ module.exports = merge(webpackCommon, {
     path: appPath.outputPath,
     publicPath: "/",
   },
+  devtool: "cheap-module-eval-source-map",
   module: {
     rules: [
       {
