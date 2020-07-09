@@ -2,6 +2,7 @@ const path = require("path");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const appPath = require("./paths");
 const webpackBar = require("webpackbar");
+const webpack = require("webpack");
 
 module.exports = {
   module: {
@@ -39,6 +40,11 @@ module.exports = {
     new webpackBar({
       name: "react-app",
     }),
+    // 如果你不使用moment可以去掉，moment.js会默认加载所有的语言包，所以我们要忽略它，当你需要多语言时请按需加载
+    // import moment from "moment";
+    // import "moment/locale/zh-cn";
+    // moment.locale("zh-cn");
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new htmlWebpackPlugin({
       template: path.resolve(appPath.publicPath, "index.html"),
       filename: "index.html",
