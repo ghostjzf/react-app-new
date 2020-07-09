@@ -32,7 +32,8 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".js", ".json"],
+    extensions: [".tsx", ".ts", ".js", ".json"],
+    alias: {},
   },
   plugins: [
     new webpackBar({
