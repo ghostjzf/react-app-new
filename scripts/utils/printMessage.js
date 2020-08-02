@@ -8,6 +8,26 @@ function printDevMessage() {
   console.log(`远程：http://${ip}:3000`);
 }
 
+function printBuildMessage(stats) {
+  console.log(
+    stats.toString({
+      warnings: true,
+      errorDetails: true,
+      cachedAssets: true,
+      builtAt: false,
+      timings: false,
+      colors: true,
+      chunks: false,
+      assets: true,
+      children: false,
+      modules: false,
+      version: false,
+      hash: false,
+    })
+  );
+}
+
 module.exports = {
   printDevMessage: printDevMessage,
+  printBuildMessage: printBuildMessage,
 };

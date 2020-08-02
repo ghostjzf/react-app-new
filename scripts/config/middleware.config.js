@@ -1,7 +1,8 @@
 const devMiddlewareOptions = {
   noInfo: true,
-  // publicPath: config.output.publicPath,
+  publicPath: "/",
   // 只在发生错误或有新的编译时输出
+  writeToDisk: true,
   stats: "minimal",
 };
 

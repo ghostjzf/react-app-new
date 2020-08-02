@@ -1,15 +1,15 @@
 import React, { Suspense, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 
-const Blog = lazy(() => import("./Blog"));
-const Resume = lazy(() => import("./Resume"));
+const Home = lazy(() => import("./modules/Home/index"));
+const Blogs = lazy(() => import("./modules/Blogs/index"));
 
 export default () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
-        <Route path="/blog" exact={true} component={Blog} />
-        <Route path="/resume" exact={true} component={Resume} />
+        <Route path="/" exact={true} component={Home} />
+        <Route path="/blog" exact={true} component={Blogs} />
       </Switch>
     </Suspense>
   );

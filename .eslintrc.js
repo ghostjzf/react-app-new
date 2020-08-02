@@ -28,5 +28,6 @@ module.exports = {
     "react/display-name": "off",
     // 禁用在react 组件不写React.FC<>类型声明时会报warning
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": 1,
   },
 };
