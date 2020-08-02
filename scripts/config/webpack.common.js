@@ -51,4 +51,16 @@ module.exports = {
       hash: true,
     }),
   ],
+  // 一些库会引用node模块，但是不会在浏览器使用它。
+  // 告诉webpack为他们提供空的模拟，以便将其导入即可。
+  node: {
+    module: "empty",
+    dgram: "empty",
+    dns: "mock",
+    fs: "empty",
+    http2: "empty",
+    net: "empty",
+    tls: "empty",
+    child_process: "empty",
+  },
 };
