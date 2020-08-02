@@ -55,6 +55,27 @@ module.exports = merge(webpackCommon, {
           },
         ],
       },
+      {
+        test: /\.less$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: true,
+            },
+          },
+          "css-loader",
+          "postcss-loader",
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   optimization: {

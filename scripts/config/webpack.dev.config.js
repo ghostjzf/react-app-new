@@ -18,7 +18,7 @@ module.exports = merge(webpackCommon, {
   module: {
     rules: [
       {
-        test: /\.css/,
+        test: /\.css$/,
         exclude: /node_modules/,
         use: ["style-loader", "css-loader"],
       },
@@ -33,6 +33,21 @@ module.exports = merge(webpackCommon, {
               implementation: require("sass"),
               sassOptions: {
                 fiber: require("fibers"),
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.less$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
               },
             },
           },
