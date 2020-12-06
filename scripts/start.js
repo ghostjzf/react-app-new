@@ -21,7 +21,7 @@ app.use(hotInstance);
 app.use(express.static(config.output.path));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.resolve(appPath.outputPath, "index.html"));
+  res.sendFile("index.html");
 });
 
 app.listen(3000, (err) => {

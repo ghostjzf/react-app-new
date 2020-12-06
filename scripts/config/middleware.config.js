@@ -2,7 +2,7 @@ const devMiddlewareOptions = {
   noInfo: true,
   publicPath: "/",
   // 只在发生错误或有新的编译时输出
-  writeToDisk: true,
+  writeToDisk: false,
   stats: "minimal",
 };
 

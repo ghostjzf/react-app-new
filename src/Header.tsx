@@ -20,8 +20,7 @@ const Header = () => {
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <Menu.Item key="mail" icon={<MailOutlined />}>
-        <NavLink>s=</NavLink>
-        Navigation One
+        <NavLink to="/">首页</NavLink>
       </Menu.Item>
       <Menu.Item key="app" disabled icon={<AppstoreOutlined />}>
         Navigation Two
