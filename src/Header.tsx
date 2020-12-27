@@ -13,6 +13,7 @@ const Header = () => {
   const [current, setCurrent] = useState<string>("mail");
 
   const handleClick = (e: any) => {
+    console.log($t("首页"));
     console.log("click ", e);
     setCurrent(e.key);
   };
@@ -20,7 +21,7 @@ const Header = () => {
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <Menu.Item key="mail" icon={<MailOutlined />}>
-        <NavLink to="/">首页</NavLink>
+        <NavLink to="/">{$t("首页")}</NavLink>
       </Menu.Item>
       <Menu.Item key="app" disabled icon={<AppstoreOutlined />}>
         Navigation Two

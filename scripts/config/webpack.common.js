@@ -4,6 +4,8 @@ const appPath = require("./paths");
 const webpackBar = require("webpackbar");
 const webpack = require("webpack");
 
+console.log(111, process.env.NODE_ENV);
+
 module.exports = {
   module: {
     rules: [
@@ -45,6 +47,9 @@ module.exports = {
     // import "moment/locale/zh-cn";
     // moment.locale("zh-cn");
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+    }),
     new htmlWebpackPlugin({
       template: path.resolve(appPath.publicPath, "index.html"),
       filename: "index.html",

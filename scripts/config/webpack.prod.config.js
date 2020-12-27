@@ -5,6 +5,11 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const appPath = require("./paths");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+
+// console.log(process.env.ANALYZE);
+const isAnalyze = process.env.ANALYZE === "true";
 
 module.exports = merge(webpackCommon, {
   mode: "production",
@@ -155,6 +160,7 @@ module.exports = merge(webpackCommon, {
       filename: "[name].[contenthash:8].css",
       chunkFilename: "[name].[contenthash:8].chunk.css",
     }),
+    isAnalyze && new BundleAnalyzerPlugin(),
     new webpack.BannerPlugin("make 2020 by ghostjzf"),
-  ],
+  ].filter(Boolean),
 });
