@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React, { Suspense, lazy } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-const Home = lazy(() => import("./modules/Home/index"));
-const Blogs = lazy(() => import("./modules/Blogs/index"));
+const Home = lazy(() => import('../Home/index'));
+const Blogs = lazy(() => import('../Blogs/index'));
 
 export default () => {
   return (
