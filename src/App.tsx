@@ -8,8 +8,10 @@ export default function App() {
   return (
     <div className="app-wrap">
       <BrowserRouter>
-        <Header />
-        <Content />
+        <div>
+          <Header />
+          <Content />
+        </div>
       </BrowserRouter>
     </div>
   );

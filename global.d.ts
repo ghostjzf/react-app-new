@@ -1,3 +1,1 @@
-interface Window {
-  $t: (key: string) => string;
-}
+declare function __(key: string): string;
