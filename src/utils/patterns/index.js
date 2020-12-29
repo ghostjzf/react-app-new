@@ -1,5 +1,4 @@
-import each from 'lodash/each';
-import camelCase from 'lodash/camelCase';
+import { each, camelCase } from 'lodash-es';
 
 const urlPipe = '(?:[0-9a-z_-]+\\.)*';
 
@@ -33,7 +32,7 @@ const patterns = {};
 each(regs, (pattern, name) => {
     const reg = new RegExp(`^${pattern}$`);
 
-    patterns[camelCase(`is-${name}`)] = str => reg.test(str);
+    patterns[camelCase(`is-${name}`)] = (str) => reg.test(str);
     patterns[name] = reg;
 });
 
