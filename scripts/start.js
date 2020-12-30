@@ -17,9 +17,10 @@ app.use(devInstance);
 app.use(hotInstance);
 app.use(express.static(config.output.path));
 
-app.get('/admin', function (req, res) {
-  res.end('admin');
-});
+// app.get('*', function (req, res) {
+//   console.log(process.cwd());
+//   res.sendFile(path.join(process.cwd(), '/public/index.html'));
+// });
 
 app.listen(3000, (err) => {
   if (err) {

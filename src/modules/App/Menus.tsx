@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu } from 'antd';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 
 const { SubMenu } = Menu;
@@ -42,7 +42,7 @@ const Menus = () => {
               verticalAlign: 'middle',
               lineHeight: '32px'
             }}>
-            Ant Design Pro
+            Tao Bai Pro
           </h1>
         </a>
       </div>
@@ -50,24 +50,14 @@ const Menus = () => {
         <Menu.Item key="mail" icon={<MailOutlined />}>
           <NavLink to="/">{__('首页')}</NavLink>
         </Menu.Item>
-        <Menu.Item key="app" disabled icon={<AppstoreOutlined />}>
-          Navigation Two
-        </Menu.Item>
-        <SubMenu icon={<SettingOutlined />} title="Navigation Three - Submenu">
-          <Menu.ItemGroup title="Item 1">
-            <Menu.Item key="setting:1">Option 1</Menu.Item>
-            <Menu.Item key="setting:2">Option 2</Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="Item 2">
-            <Menu.Item key="setting:3">Option 3</Menu.Item>
-            <Menu.Item key="setting:4">Option 4</Menu.Item>
-          </Menu.ItemGroup>
+        <SubMenu icon={<UserOutlined />} title={__('个人页')}>
+          <Menu.Item key="center">
+            <NavLink to="/user/center">{__('个人中心')}</NavLink>
+          </Menu.Item>
+          <Menu.Item key="setting">
+            <NavLink to="/user/setting">{__('个人设置')}</NavLink>
+          </Menu.Item>
         </SubMenu>
-        <Menu.Item key="alipay">
-          <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-            Navigation Four - Link
-          </a>
-        </Menu.Item>
       </Menu>
     </div>
   );

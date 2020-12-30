@@ -5,7 +5,7 @@ import US from './locales/en_US.json';
 import './index.scss';
 
 function __(key: string) {
-  return (US as any)[key];
+  return key || (US as any)[key];
 }
 
 window.__ = __;

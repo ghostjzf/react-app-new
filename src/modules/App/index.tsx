@@ -13,7 +13,7 @@ export default function App() {
     <div className="app-wrap">
       <BrowserRouter>
         <Layout>
-          <Sider style={{ height: '100vh' }}>
+          <Sider style={{ height: '100vh', position: 'sticky', top: 0 }}>
             <Menus />
           </Sider>
           <Layout>
