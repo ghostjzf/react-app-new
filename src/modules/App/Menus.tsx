@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu } from 'antd';
 import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -9,6 +9,10 @@ const { SubMenu } = Menu;
 const Menus = () => {
   const location = useLocation();
   const [current, setCurrent] = useState<string>(location.pathname);
+
+  useEffect(() => {
+    setCurrent(location.pathname);
+  }, [location.pathname]);
 
   const handleClick = (e: any) => {
     console.log(__('首页'));
