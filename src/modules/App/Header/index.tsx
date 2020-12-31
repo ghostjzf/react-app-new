@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Avatar, Menu, Dropdown } from 'antd';
 import { UserOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default () => {
+  const store = useSelector((state) => state.security);
+  const dispatch = useDispatch();
+
+  console.log(store);
+
+  useEffect(() => {
+    dispatch({
+      type: 'LOGIN',
+      payload: {
+        isLogin: true,
+        currentUser: 'Tao bai'
+      }
+    });
+  }, []);
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -22,7 +38,7 @@ export default () => {
       <Menu.Item>
         <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
           <LogoutOutlined />
-          退出登录
+          {__('退出登录')}
         </a>
       </Menu.Item>
     </Menu>

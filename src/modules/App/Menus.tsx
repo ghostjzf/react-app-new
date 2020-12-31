@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Menu } from 'antd';
-import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import { NavLink, useLocation } from 'react-router-dom';
 import menus from 'stores/menus';
 
@@ -9,36 +8,51 @@ const { SubMenu } = Menu;
 const Menus = () => {
   const location = useLocation();
   const [current, setCurrent] = useState<string>(location.pathname);
-
-  useEffect(() => {
-    setCurrent(location.pathname);
-  }, [location.pathname]);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   const handleClick = (e: any) => {
-    console.log(__('首页'));
     console.log('click ', e);
-    setCurrent(e.key);
+    const key = e.key;
+
+    if (key === current) {
+      return;
+    }
+
+    setCurrent(key);
   };
 
-  const getDefaultOpenKeys = () => {
-    let result: string;
+  const onOpenKeysChange = (e: any) => {
+    const key = e.key;
 
+    if (openKeys.includes(key)) {
+      const newOpenKeys = openKeys.filter((item) => item !== key);
+
+      setOpenKeys(newOpenKeys);
+    } else {
+      setOpenKeys([...openKeys, key]);
+    }
+  };
+
+  const getOpenKeys = () => {
     menus.forEach((item) => {
       if (item.path === location.pathname) {
-        result = item.path;
+        setOpenKeys([...openKeys, item.path]);
       }
 
       if (item.children) {
         item.children.forEach((child) => {
           if (child.path === location.pathname) {
-            result = item.path;
+            setOpenKeys([...openKeys, item.path]);
           }
         });
       }
     });
-
-    return result;
   };
+
+  useEffect(() => {
+    setCurrent(location.pathname);
+    getOpenKeys();
+  }, [location.pathname]);
 
   return (
     <div>
@@ -73,18 +87,19 @@ const Menus = () => {
         </a>
       </div>
       <Menu
+        style={{ userSelect: 'none' }}
         onClick={handleClick}
-        defaultOpenKeys={[getDefaultOpenKeys()]}
+        openKeys={openKeys}
         selectedKeys={[current]}
         theme="dark"
         mode="inline">
         {menus.map((item) => {
           if (item.children) {
             return (
-              <SubMenu key={item.path} icon={<UserOutlined />} title={item.title}>
+              <SubMenu onTitleClick={onOpenKeysChange} key={item.path} icon={item.icon} title={item.title}>
                 {item.children.map((child) => {
                   return (
-                    <Menu.Item key={child.path} icon={<MailOutlined />}>
+                    <Menu.Item key={child.path}>
                       <NavLink to={child.path}>{child.title}</NavLink>
                     </Menu.Item>
                   );
@@ -94,22 +109,11 @@ const Menus = () => {
           }
 
           return (
-            <Menu.Item key={item.path} icon={<MailOutlined />}>
+            <Menu.Item key={item.path} icon={item.icon}>
               <NavLink to={item.path}>{item.title}</NavLink>
             </Menu.Item>
           );
         })}
-        {/* <Menu.Item key="mail" icon={<MailOutlined />}>
-          <NavLink to="/">{__('首页')}</NavLink>
-        </Menu.Item>
-        <SubMenu icon={<UserOutlined />} title={__('个人页')}>
-          <Menu.Item key="center">
-            <NavLink to="/user/center">{__('个人中心')}</NavLink>
-          </Menu.Item>
-          <Menu.Item key="setting">
-            <NavLink to="/user/setting">{__('个人设置')}</NavLink>
-          </Menu.Item>
-        </SubMenu> */}
       </Menu>
     </div>
   );
