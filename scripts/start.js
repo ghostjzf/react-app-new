@@ -17,10 +17,19 @@ app.use(devInstance);
 app.use(hotInstance);
 app.use(express.static(config.output.path));
 
-// app.get('*', function (req, res) {
-//   console.log(process.cwd());
-//   res.sendFile(path.join(process.cwd(), '/public/index.html'));
-// });
+app.get('*', function (req, res) {
+  const filename = path.join(config.output.path, 'index.html');
+
+  compiler.outputFileSystem.readFile(filename, (err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    res.set('content-type', 'text/html');
+    res.send(result);
+    res.end();
+  });
+});
 
 app.listen(3000, (err) => {
   if (err) {
