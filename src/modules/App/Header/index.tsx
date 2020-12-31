@@ -1,21 +1,22 @@
 import React from 'react';
 import { Row, Col, Avatar, Menu, Dropdown } from 'antd';
 import { UserOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
 
 export default () => {
   const menu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+        <NavLink to="/user/center">
           <UserOutlined />
-          个人中心
-        </a>
+          {__('个人中心')}
+        </NavLink>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+        <NavLink to="/user/setting">
           <SettingOutlined />
-          个人设置
-        </a>
+          {__('个人设置')}
+        </NavLink>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item>
