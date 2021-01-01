@@ -1,0 +1,22 @@
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ececec;
+}
+.login-content {
+  width: 300px;
+}
+.login-content .login-form {
+  max-width: 300px;
+}
+.login-content .login-form-forgot {
+  float: right;
+}
+.login-content .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+.login-content .login-form-button {
+  width: 100%;
+}
