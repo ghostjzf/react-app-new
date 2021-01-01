@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 const { Footer, Sider } = Layout;
 
 const App = () => {
-  const security = useSelector((state) => state.security);
+  const { ui, security } = useSelector((state: { ui: any; security: any }) => state);
 
   if (!security.isLogin) {
     return <Login />;
@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <Layout>
-      <Sider style={{ height: '100vh', position: 'sticky', top: 0 }}>
+      <Sider collapsed={ui.collapsed} style={{ height: '100vh', position: 'sticky', top: 0 }}>
         <Menus />
       </Sider>
       <Layout>

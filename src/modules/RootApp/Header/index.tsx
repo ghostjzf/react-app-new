@@ -1,16 +1,35 @@
-import React, { useEffect } from 'react';
-import { Row, Col, Avatar, Menu, Dropdown } from 'antd';
-import { UserOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Avatar, Menu, Dropdown, Button } from 'antd';
+import { UserOutlined, SettingOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import http from 'utils/http';
 
 export default () => {
+  const [collapsed, setCollapsed] = useState(false);
   const store = useSelector((state) => state.security);
   const dispatch = useDispatch();
 
   console.log(store);
+  const toggleCollapsed = () => {
+    const newVal = !collapsed;
+
+    setCollapsed(newVal);
+
+    dispatch({
+      type: 'SET_COLLAPSED',
+      payload: {
+        collapsed: newVal
+      }
+    });
+  };
 
   useEffect(() => {
+    http.get('/list', {
+      params: {
+        id: 1
+      }
+    });
     dispatch({
       type: 'LOGIN',
       payload: {
@@ -45,8 +64,12 @@ export default () => {
   );
 
   return (
-    <Row style={{ height: '48px', backgroundColor: '#fff', padding: '0 10px 0 5px' }}>
-      <Col span={10}></Col>
+    <Row align="middle" style={{ height: '48px', backgroundColor: '#fff', padding: '0 10px 0 5px' }}>
+      <Col span={10}>
+        <Button size="small" onClick={toggleCollapsed}>
+          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
+        </Button>
+      </Col>
       <Col span={14}>
         <Row justify="end" align="middle" style={{ height: '100%' }}>
           <Col>

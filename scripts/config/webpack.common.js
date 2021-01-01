@@ -3,6 +3,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const appPath = require('./paths');
 const webpackBar = require('webpackbar');
 const webpack = require('webpack');
+const localPaths = require('./paths');
 
 module.exports = {
   module: {
@@ -35,8 +36,9 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
     alias: {
-      '@': path.resolve(process.cwd(), 'src'),
-      stores: path.resolve(process.cwd(), 'src/stores')
+      '@': localPaths.resolve('src'),
+      stores: localPaths.resolve('src/stores'),
+      utils: localPaths.resolve('src/utils')
     }
   },
   plugins: [

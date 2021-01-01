@@ -1,6 +1,6 @@
 const defaultState = {
   currentUser: '',
-  isLogin: false
+  isLogin: true
 };
 
 const security = (state = defaultState, action) => {

@@ -7,6 +7,7 @@ function resolve(pathname) {
 }
 
 module.exports = {
+  resolve,
   outputPath: resolve('dist'),
   srcPath: resolve('src'),
   entryPath: resolve('src/index.tsx'),
