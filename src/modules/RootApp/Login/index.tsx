@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
+import http from 'utils/http';
 import './style.scss';
 
 const NormalLoginForm = () => {
@@ -9,13 +10,20 @@ const NormalLoginForm = () => {
 
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
-    dispatch({
-      type: 'LOGIN',
-      payload: {
-        isLogin: true,
-        currentUser: values.username
-      }
-    });
+
+    http
+      .post('http://localhost:8080/api/login', values, {
+        useJson: true
+      })
+      .then((res) => {
+        dispatch({
+          type: 'LOGIN',
+          payload: {
+            isLogin: true,
+            currentUser: values.username
+          }
+        });
+      });
   };
 
   return (
@@ -29,7 +37,7 @@ const NormalLoginForm = () => {
             <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password" />
           </Form.Item>
           <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
+            <Form.Item name="" valuePropName="checked" noStyle>
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
 

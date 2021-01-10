@@ -10,6 +10,7 @@ const Menus = () => {
   const location = useLocation();
   const [current, setCurrent] = useState<string>(location.pathname);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [tempOpenKeys, setTempOpenKeys] = useState<string[]>([]);
   const ui = useSelector((state) => state.ui);
 
   console.log(ui);
@@ -38,20 +39,35 @@ const Menus = () => {
   };
 
   const getOpenKeys = () => {
+    const keysData: any[] = [];
+
     menus.forEach((item) => {
       if (item.path === location.pathname) {
-        setOpenKeys([...openKeys, item.path]);
+        keysData.push(item.path);
       }
 
       if (item.children) {
         item.children.forEach((child) => {
           if (child.path === location.pathname) {
-            setOpenKeys([...openKeys, item.path]);
+            keysData.push(item.path);
           }
         });
       }
     });
+
+    setTempOpenKeys(keysData);
+    setOpenKeys(keysData);
   };
+
+  useEffect(() => {
+    if (ui.collapsed) {
+      setTempOpenKeys(openKeys);
+      setOpenKeys([]);
+    } else {
+      setOpenKeys(tempOpenKeys);
+      setTempOpenKeys([]);
+    }
+  }, [ui.collapsed]);
 
   useEffect(() => {
     setCurrent(location.pathname);

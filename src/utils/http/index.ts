@@ -56,6 +56,8 @@ const ERROR_MSG = {
   503: '抱歉，当前服务器异常，请稍后再试'
 };
 
+axios.defaults.withCredentials = true;
+
 axios.interceptors.request.use((config: AxiosRequestConfig) => {
   if (!config.timeout) {
     config.timeout = 60 * 1000;
@@ -84,65 +86,65 @@ axios.interceptors.request.use((config: AxiosRequestConfig) => {
   }
 
   // 请求添加token头
-  if (!config.noAuth && security.token) {
-    config.headers.Authorization = `Basic ${security.token}`;
-  }
+  // if (!config.noAuth && security.token) {
+  //   config.headers.Authorization = `Basic ${security.token}`;
+  // }
 
   return config;
 });
 
 // 针对请求预期文件却返回json格式的请求，尝试进行解析
-const parseJsonResponseData = (response) => {
-  const isReqArrayBufferType = response.request.responseType === 'arraybuffer';
+// const parseJsonResponseData = (response) => {
+//   const isReqArrayBufferType = response.request.responseType === 'arraybuffer';
 
-  if (!isReqArrayBufferType) {
-    return response.data;
-  }
+//   if (!isReqArrayBufferType) {
+//     return response.data;
+//   }
 
-  const contentType = response.headers['content-type'];
-  const isJsonResponseType = !!contentType && contentType.indexOf('json') !== -1;
+//   const contentType = response.headers['content-type'];
+//   const isJsonResponseType = !!contentType && contentType.indexOf('json') !== -1;
 
-  if (isJsonResponseType && isReqArrayBufferType) {
-    const resText = Buffer.from(response.data).toString('utf8');
-    const resJson = JSON.parse(resText);
+//   if (isJsonResponseType && isReqArrayBufferType) {
+//     const resText = Buffer.from(response.data).toString('utf8');
+//     const resJson = JSON.parse(resText);
 
-    return resJson;
-  }
+//     return resJson;
+//   }
 
-  return response.data;
-};
+//   return response.data;
+// };
 
 // 请求图片等文件资源，返回却是JSON（错误信息）, 需要对response.data做下处理
-axios.interceptors.response.use(
-  (response: AxiosResponse) => {
-    response.data = parseJsonResponseData(response);
+// axios.interceptors.response.use(
+//   (response: AxiosResponse) => {
+//     response.data = parseJsonResponseData(response);
 
-    return response;
-  },
-  (responseError: AxiosError) => {
-    if (responseError && responseError.response) {
-      responseError.response.data = parseJsonResponseData(responseError.response);
-    }
+//     return response;
+//   },
+//   (responseError: AxiosError) => {
+//     if (responseError && responseError.response) {
+//       responseError.response.data = parseJsonResponseData(responseError.response);
+//     }
 
-    return Promise.reject(responseError);
-  }
-);
+//     return Promise.reject(responseError);
+//   }
+// );
 
 axios.interceptors.response.use((response: AxiosResponse) => {
   const data = response.data;
 
-  if (data && typeof data === 'object') {
-    if (
-      ('code' in data && data.code * 1 !== 0 && data.code * 1 !== 200) || // code !== 200 针对CMP相关业务接口添加
-      ('status' in data && data.status !== 'ok' && `${data.status}` !== '200') ||
-      ('is_succ' in data && !data.is_succ) ||
-      ('errcode' in data && data.errcode * 1 !== 0)
-    ) {
-      return createError({ response } as AxiosError);
-    }
+  // if (data && typeof data === 'object') {
+  //   if (
+  //     ('code' in data && data.code * 1 !== 0 && data.code * 1 !== 200) || // code !== 200 针对CMP相关业务接口添加
+  //     ('status' in data && data.status !== 'ok' && `${data.status}` !== '200') ||
+  //     ('is_succ' in data && !data.is_succ) ||
+  //     ('errcode' in data && data.errcode * 1 !== 0)
+  //   ) {
+  //     return createError({ response } as AxiosError);
+  //   }
 
-    return data;
-  }
+  //   return data;
+  // }
 
   return response;
 }, createError);
