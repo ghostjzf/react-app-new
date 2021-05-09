@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducers from '@/stores/reducers';
 import App from './App';
-import 'antd/dist/antd.less';
+import '@/assets/css/vendor.less';
 
 const store = createStore(rootReducers);
 

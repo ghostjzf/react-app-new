@@ -11,6 +11,23 @@ export default [
     component: lazy(() => import('@/modules/Home/index'))
   },
   {
+    title: __('详情页'),
+    path: '/profile',
+    icon: <UserOutlined />,
+    children: [
+      {
+        title: __('基础详情页'),
+        path: '/profile/basic',
+        component: lazy(() => import('@/modules/profile/Basic'))
+      },
+      {
+        path: '/user/advanced',
+        title: __('个人设置'),
+        component: lazy(() => import('@/modules/profile/Advanced'))
+      }
+    ]
+  },
+  {
     title: __('个人页'),
     path: '/user',
     icon: <MailOutlined />,

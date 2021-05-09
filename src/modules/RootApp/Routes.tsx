@@ -1,19 +1,20 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-
-const Home = lazy(() => import('../Home/index'));
-const Blogs = lazy(() => import('../Blogs/index'));
-const UserCenter = lazy(() => import('../user/Center'));
-const UserSettings = lazy(() => import('../user/Settings'));
+import Loading from '@/components/Loading';
+import menus from '@/stores/menus';
 
 export default () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <Switch>
-        <Route path="/" exact={true} component={Home} />
-        <Route path="/blog" exact={true} component={Blogs} />
-        <Route path="/user/center" exact={true} component={UserCenter} />
-        <Route path="/user/setting" exact={true} component={UserSettings} />
+        {menus.map((item) => {
+          if (item.children) {
+            return item.children.map((c) => {
+              return <Route key={c.path} path={c.path} exact={true} component={c.component} />;
+            });
+          }
+          return <Route key={item.path} path={item.path} exact={true} component={item.component} />;
+        })}
         <Redirect to="/" />
       </Switch>
     </Suspense>
