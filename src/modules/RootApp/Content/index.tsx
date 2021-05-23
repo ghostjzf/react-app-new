@@ -1,7 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
 import Routes from '../Routes';
-import SettingDrawer from '@/components/SettingDrawer';
 import './index.scss';
 
 const { Content } = Layout;
@@ -12,7 +11,6 @@ export default () => {
       <Content className="app-content">
         <div className="site-layout-background" style={{ minHeight: 500 }}>
           <Routes />
-          <SettingDrawer />
         </div>
       </Content>
     </div>
