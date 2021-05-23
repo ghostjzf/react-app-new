@@ -1,6 +1,5 @@
-/* tslint:disable */
-import React, { Children, cloneElement, Component } from 'react';
-import { render as reactRender, unmountComponentAtNode, createPortal, Renderer } from 'react-dom';
+import React, { Children, cloneElement } from 'react';
+import { render as reactRender, unmountComponentAtNode } from 'react-dom';
 import { Modal } from 'antd';
 import { ModalProps } from 'antd/lib/modal';
 import { isValidElementType } from 'react-is';
@@ -40,7 +39,7 @@ const defaultSettings = {
     closable: false
 };
 
-let renderToRoot = reactRender;
+const renderToRoot = reactRender;
 
 /**
  * @desc 给antd的Modal扩展一个open方法，用来方便的创建更灵活的modal。
@@ -66,9 +65,9 @@ let renderToRoot = reactRender;
  *          返回一个对象，包含了close、dismiss两个关闭方法，以及一个result的promise对象，可以通过该promise来访问modal关闭时的回调！
  */
 export const open = ((Modal as ModalShadow).open = (props: ModalConfig = {}) => {
-    let destroyed;
-    let withResolve;
-    let withReject;
+    let destroyed:unknown;
+    let withResolve:any;
+    let withReject:any;
 
     const settings = { ...defaultSettings, ...props };
 
@@ -76,7 +75,7 @@ export const open = ((Modal as ModalShadow).open = (props: ModalConfig = {}) => 
         delete settings.footer;
     }
 
-    if (props.onOk) {
+    if (typeof props.onOk === 'function') {
         settings.onOk = ev => props.onOk!(ev, { close, dismiss });
     }
 
@@ -98,15 +97,15 @@ export const open = ((Modal as ModalShadow).open = (props: ModalConfig = {}) => 
         }
     }
 
-    function close(data) {
+    function close(data:any) {
         render(false, () => withResolve(data));
     }
 
-    function dismiss(reason) {
+    function dismiss(reason:any) {
         render(false, () => withReject(reason));
     }
 
-    function render(visible, callback?: () => void) {
+    function render(visible:boolean, callback?: () => void) {
         const { component: TheComponent, ...props } = settings;
         const childProps = {
             close,
@@ -122,7 +121,6 @@ export const open = ((Modal as ModalShadow).open = (props: ModalConfig = {}) => 
         }
 
         renderToRoot(
-            // @ts-ignore
             <Modal
                 onCancel={dismiss as any}
                 onOk={close as any}
@@ -158,60 +156,4 @@ export const open = ((Modal as ModalShadow).open = (props: ModalConfig = {}) => 
         }
     };
 });
-
-export interface ModalRootState {
-    modals: Record<string, React.ReactElement>;
-}
-
-export class ModalRoot extends Component<{}, ModalRootState> {
-    readonly state: ModalRootState = {
-        modals: {}
-    };
-
-    root: HTMLDivElement;
-
-    public componentDidMount() {
-        renderToRoot = ((element, target) => {
-            if (!target.id) {
-                target.id = 'ant-modal-' + (Date.now() + Math.random());
-            }
-
-            const { modals } = this.state;
-            const originalCallback = element.props.afterClose;
-
-            modals[target.id] = cloneElement(element, {
-                key: target.id,
-                afterClose: () => {
-                    originalCallback?.();
-
-                    const { modals } = this.state;
-
-                    delete modals[target.id];
-
-                    this.setState({
-                        modals
-                    });
-                }
-            });
-
-            this.setState({
-                modals
-            });
-        }) as Renderer;
-    }
-
-    public componentWillUnmount() {
-        this.root && document.body.removeChild(this.root);
-    }
-
-    render() {
-        if (!this.root) {
-            this.root = document.createElement('div');
-
-            document.body.appendChild(this.root);
-        }
-
-        return createPortal(Object.values(this.state.modals), this.root);
-    }
-}
 

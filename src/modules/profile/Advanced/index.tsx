@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Loading from '@/components/Loading';
 
 export default () => {

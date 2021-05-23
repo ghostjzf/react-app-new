@@ -146,7 +146,7 @@ axios.interceptors.response.use((response: AxiosResponse) => {
   //   return data;
   // }
 
-  return response;
+  return data;
 }, createError);
 
 /**

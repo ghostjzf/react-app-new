@@ -15,7 +15,7 @@ const NormalLoginForm = () => {
       .post('http://localhost:8080/api/login', values, {
         useJson: true
       })
-      .then((res) => {
+      .then(() => {
         dispatch({
           type: 'LOGIN',
           payload: {

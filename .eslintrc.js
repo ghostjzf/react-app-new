@@ -25,6 +25,8 @@ module.exports = {
     // 禁用在react 组件不写React.FC<>类型声明时会报warning
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': 1,
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    // 关闭禁用！使用
+    "@typescript-eslint/no-non-null-assertion": "off",
   }
 };

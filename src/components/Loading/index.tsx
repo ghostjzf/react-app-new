@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM, { unmountComponentAtNode } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Spin, Row, Col } from 'antd';
 import './style.scss';
 
