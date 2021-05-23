@@ -11,7 +11,7 @@ const Menus = () => {
   const [current, setCurrent] = useState<string>(location.pathname);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [tempOpenKeys, setTempOpenKeys] = useState<string[]>([]);
-  const ui = useSelector((state) => state.ui);
+  const ui = useSelector((state: {ui: any}) => state.ui);
 
   console.log(ui);
 

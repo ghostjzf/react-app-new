@@ -25,6 +25,7 @@ module.exports = {
       },
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        exclude: /node_modules/,
         loader: 'url-loader',
         options: {
           limit: 8192,

@@ -11,6 +11,23 @@ export default [
     component: lazy(() => import('@/modules/Home/index'))
   },
   {
+    path: "/table",
+    title: "列表页",
+    icon: <UserOutlined />,
+    children: [
+      {
+        title: __('table-render'),
+        path: '/table/basic',
+        component: lazy(() => import('@/modules/list/TableRender'))
+      },
+      {
+        title: __('pro-table'),
+        path: '/table/pro',
+        component: lazy(() => import('@/modules/list/ProTable'))
+      },
+    ]
+  },
+  {
     title: __('详情页'),
     path: '/profile',
     icon: <UserOutlined />,
