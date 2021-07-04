@@ -18,7 +18,7 @@ module.exports = merge(webpackCommon, {
   },
   output: {
     path: appPath.outputPath,
-    filename: "[name].[contenthash:8].js",
+    filename: "js/[name].[contenthash:8].js",
     publicPath: "/",
   },
   devtool: "hidden-source-map",
@@ -156,8 +156,8 @@ module.exports = merge(webpackCommon, {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "[name].[contenthash:8].css",
-      chunkFilename: "[name].[contenthash:8].chunk.css",
+      filename: "css/[name].[contenthash:8].css",
+      chunkFilename: "css/[name].[contenthash:8].chunk.css",
     }),
     isAnalyze && new BundleAnalyzerPlugin(),
     new webpack.BannerPlugin("make 2020 by ghostjzf"),

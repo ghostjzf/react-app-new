@@ -21,5 +21,5 @@
       "utils/*": ["src/utils/*"]
     }
   },
-  "exclude": ["scripts", "dist", "node_modules"]
+  "exclude": ["scripts", "dist", "node_modules", "server"]
 }
