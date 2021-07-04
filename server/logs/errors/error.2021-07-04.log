@@ -58,3 +58,8 @@
     at /Users/jiangzhifeng/study/react-app-new/server/middleware/logger.js:83:18
     at async /Users/jiangzhifeng/study/react-app-new/server/middleware/logger.js:75:5
     at async cors (/Users/jiangzhifeng/study/react-app-new/node_modules/@koa/cors/index.js:56:32)  — RT: 0ms
+[2021-07-04T14:57:14.418] [ERROR] errorLogger - NotFoundError: Not Found
+    at Object.throw (/Users/jiangzhifeng/study/react-app-new/node_modules/koa/lib/context.js:97:11)
+    at /Users/jiangzhifeng/study/react-app-new/server/middleware/logger.js:83:18
+    at async /Users/jiangzhifeng/study/react-app-new/server/middleware/logger.js:75:5
+    at async cors (/Users/jiangzhifeng/study/react-app-new/node_modules/@koa/cors/index.js:56:32)  — RT: 1ms
